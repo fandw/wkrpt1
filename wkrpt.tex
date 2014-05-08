@@ -46,19 +46,6 @@
 \tocsection{Executive Summary}
 EXECUTIVE SUMMARY
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=90mm,height=5cm,keepaspectratio]{img/bbb.jpg}
-\caption{A simple caption}
-\label{overflow}
-\end{figure}
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=90mm,height=5cm,keepaspectratio]{img/aaa.jpg}
-\caption{A simple caption}
-\label{overflow}
-\end{figure}
 
 
 \newpage
@@ -73,33 +60,18 @@ EXECUTIVE SUMMARY
 
 Telus Health is a “TELUS Health is a leader in telehomecare, electronic medical and health records, consumer health, benefits management and pharmacy management.”\cite{telusComp}. With the recent acquisition of Med Access Inc., Telus is “confirmed as the largest EMR (Electronic Medical Record) provider in Canada”\cite{telusComp}. This title has encouraged Telus to provide service with higher quality. In January 2014， I was assigned to the VIP room to implement a web service that mainly contains a drug claim searching and benefit management feature. This particular feature allows different levels of users such as patient, insurer and pharmacist to access the patient's record of drug claims and payments. After a certain amount of designing and coding, it came to the point where some basic testing for the code was necessary. I believe that even elementary testings should be carefully designed for future documentation and reproduction. \\
 
-Functionality testing has always been one of the most important tasks in the quality assurance (abbreviated as QA) process. All companies are working to discover a testing method which is able to cover all sources of error, requires minimal human effort and consumes least amount of time. It is especially important for Telus Health, a company which has adapted the Agile software development system, to have a highly efficient QA process in order to accommodate the fast pace of the system.\\
+Functionality testing has always been one of the most important tasks in the quality assurance (abbreviated as QA) process. All companies are working to discover a testing method which is able to cover all sources of error, requires minimal human effort and consumes least amount of time. It is especially important for Telus Health, a company which has adapted the Agile software development system, to have a highly efficient QA process in order to accommodate the fast pace of the system. At Telus, agile development is structured as series of “sprint cycles.” Every aspect of the development process, including technical requirements, design etc., are continually revisited throughout the lifecycle of the project. As a consequence, a series of developing and testing will take place. As illustrated in Figure 1, the testing phase appears on a intense frequency, which results in many high demands on the tests' quality, efficiency etc. These demands will be considered as criteria to evaluate a testing approach later on in the report.\\
 
-Since the advent of computers, people are persistently finding new and innovative 
-ways of automating as many tasks and processes as possible. Automation is a desirable 
-goal for many companies because it is a very effective way of increasing efficiency. 
-Once a process is automated, a company need not allocate a lot, if any, resources to 
-executing that process since it is now performed without any manual intervention. It then 
-follows that Goodbank, a bank whose name has been changed because it is not needed for 
-the report and for privacy reasons, will want to automate a significant number of tasks. 
-This is especially true in the case of quality assurance (QA) because of the importance it 
-holds for financial companies, like banks, and the amount of resources that banks 
-typically require for QA assignments. It is important to note that “(Manual) Testing 
-accounts for 25% to 50% of the total budget in many software projects [1]” which is no 
-exception in the case of Goodbank. One group of processes that Deloitte has been 
-brought in to automate are the QA tasks that involve testing the messages that are sent 
-between the many systems utilized by Goodbank. These messages are used to relay 
-information and commands between the bank’s services. All of these messages are in 
-Extensible Markup Language (XML) format but differ considerably in the layout of the 
-elements. All of the respective systems know how to interpret and respond to messages 
-that fit each system’s specified format; all other messages are ignored and discarded. 
-Currently, the QA department of Goodbank tests the messaging services by manually 
-creating XML request messages that satisfy certain test requirements, comparing the 
-response messages they receive, also in XML format, and determining if there are any 
-discrepancies between the response message and the expected response message. Manual 
-testing, such as the process just described, is often considered “difficult, tedious, time 
-consuming, and inadequate [1]”. This is the task that the Deloitte team has been brought 
-in to automate.
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=12.5cm,height=12.5cm,keepaspectratio]{img/agile.png}
+\caption{Agile development workflow}
+\label{overflow}
+\end{figure}
+
+This report provides an evaluation of three functionality testing methods, assessing their 
+suitability to the VIP room web service. You will first be introduced to the VIP room work flow. Then, the three approaches for testing will be explained and compared in detail. Comparisons will be made among various criteria and will be finalized using the Decision Matrix Analysis. Finally, the report summarizes the results of the analysis, draws 
+conclusions, and makes a recommendation. The reader is expected to have reasonable background in web service development. Basic knowledge in the Extensible Markup Language (XML)would also help the reader quickly understand one of the approaches. Other technology and terminologies used in this report will be explained on their first appearance.\\
 
 
 
@@ -130,15 +102,6 @@ RECOMMENDATIONS
 
   \bibitem{telusComp} Telus Health Inc., "Telus Health: Home," Telus Health Inc., {\em http://www.telushealth.com/} (current April 11 2014).
 
-  \bibitem{impj}  The Japan Reader {\em Imperial Japan 1800-1945} 1973:
-  Random House, N.Y.
-
-  \bibitem{norman} E. H. Norman {\em Japan's emergence as a modern
-  state} 1940: International Secretariat, Institute of Pacific
-  Relations.
-
-  \bibitem{fo} Bob Tadashi Wakabayashi {\em Anti-Foreignism and Western
-  Learning in Early-Modern Japan} 1986: Harvard University Press.
 
 \end{thebibliography}
 \newpage
