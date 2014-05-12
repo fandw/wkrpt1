@@ -144,9 +144,36 @@ public class SimpleTest {
 \newpage
 
 \section{Comparison and Evaluation}
-
+It is not doubt that efficiency plays an important role when it comes to judging which approach is the best. Therefore all factors that influence the efficiency of the test should be evaluated separately.  The three approaches will be compared against each of these criteria. And in the end the criteria will be weighed based on their level of importance to produce one final sum for each approach.\\
 \subsection{Time}
+This subsection measures the average amount of time to run one single test. All three approaches will use the exact same inputs. The data used will be typical for VIP room clients. Due to confidentiality and copyright, the input data can only be briefly described as:  It contains six mandatory fields and seven optional fields. Three of the mandatory fields are numerical fields and the rest are alphabetical. All seven optional fields are alphabetical fields.\\
+
+Five sets of input was selected with each taking notably different amount of time when tested. Each set is tested three times on each approach to increase precision and the result is shown in Figure 5 (All values take the unit of a millisecond):\\
+
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=6cm,height=6cm,keepaspectratio]{img/timeTable.jpg}
+\caption{Time taken by different approaches}
+\label{overflow}
+\end{figure}
+
+
+Figure 6 illustrates the average time taken every test case:\\
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=9cm,height=9cm,keepaspectratio]{img/timeGraph.jpg}
+\caption{Time taken by test cases}
+\label{overflow}
+\end{figure}
+
+The graph shows that all three approaches finish all test cases in the same time frame with SOAP taking the longest and JUnit taking the least. This result is reasonable since the amount of time that runtime execution takes is dominant in the values displayed on the graph. At the mean time, the SOAP protocol wraps input data in an envelope when sending and checks the output with assertions and validations. This can explain the fact that it is taking longer than the others. Please note that this subsection does not measure the amount of time for quality analysts to enter the data when using the three approaches. This justified in the next subsection. \\
+
+
 \subsection{Automation}
+Automation is the most popular topic among quality analysts who seek to improve their testing. It brings high efficiency and low human labour
+
 \subsection{Reproduction}
 \subsection{Customization}
 \subsection{Management}
