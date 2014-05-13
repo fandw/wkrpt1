@@ -44,15 +44,26 @@
 
 
 \tocsection{Executive Summary}
-EXECUTIVE SUMMARY
+Telus Inc., a leading Electronic Medical Record (EMR) provider in Canada, is designing VIP room, a drug claim searching web application for patients and insurers. A major step in the designing phase involves a 
+decision of choosing an approach/method to test the application. This report provides a comparison of three 
+alternatives, UI testing, SOAP testing and JUnit testing, assessing their suitability to the application.\\
+
+This report analyses the three approaches/methods against four criteria: Time, Automation, Reproduction and Productivity. A decision matrix is used to determine the most suitable approach/method.\\
+
+The three methods/approaches excel in different criteria. UI testing performs well in Time, SOAP leads in Reproduction and JUnit holds the standard for Productivity. UI testing is not successful in Automation while SOAP and JUnit performs equally well in the most important aspect of functional testing.\\
+
+Ultimately, the decision matrix indicates that JUnit is the most suitable solution. However, the close score from SOAP affected the decision making. It is finally determined that both JUnit and SOAP will be used to test VIP room to compensate the shortcoming of both methods/approaches. This report recommends that the SOAP test cases to be carefully labelled and grouped in order for quality analysts to share and JUnit test case modifications to be severely managed by version control to avoid mass build failures.\\
 
 
 
 \newpage
 
-\toc
-% \lof
-% \lot
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
 
 
 \pagenumbering{arabic}
@@ -79,7 +90,7 @@ conclusions, and makes a recommendation. The reader is expected to have reasonab
 
 \section{Problem Specification}
 \subsection{Background}
-The VIP room web service utilizes the traditional three-tier architecture. Figure 2 depicts the sequence diagram of a three-tier web service workflow:
+The web application uses Apache Maven as its build manager and Apache Tomcat as server. It utilizes the traditional three-tier architecture. Figure 2 depicts the sequence diagram of a three-tier web service workflow:
 
 \begin{figure}[ht!]
 \centering
@@ -88,14 +99,15 @@ The VIP room web service utilizes the traditional three-tier architecture. Figur
 \label{overflow}
 \end{figure}
 
+
 \subsection{Options}
-The three testing approaches sends data to different part of the flow.\\
+The three testing approaches sends data to different part of the flow.
 \subsubsection{Manual testing from User Interface}
 The most naive method is to manually enter input data on the User Interface (UI) \\
 		
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=7cm,height=7cm,keepaspectratio]{img/ui.jpg}
+\includegraphics[width=5cm,height=5cm,keepaspectratio]{img/ui.jpg}
 \caption{input from simple UI}
 \label{overflow}
 \end{figure}
@@ -143,8 +155,8 @@ public class SimpleTest {
 \end{lstlisting}
 \newpage
 
-\section{Comparison and Evaluation}
-It is not doubt that efficiency plays an important role when it comes to judging which approach is the best. Therefore all factors that influence the efficiency of the test should be evaluated separately.  The three approaches will be compared against each of these criteria. And in the end the criteria will be weighed based on their level of importance to produce one final sum for each approach.\\
+\section{Comparison}
+It is not doubt that efficiency plays an important role when it comes to judging which approach is the best. Therefore all factors that influence the efficiency of the test should be analysed separately.  The three approaches will be compared against each of these criteria. And in the end the criteria will be weighed based on their level of importance to produce one final sum for each approach.\\
 \subsection{Time}
 This subsection measures the average amount of time to run one single test. All three approaches will use the exact same inputs. The data used will be typical for VIP room clients. Due to confidentiality and copyright, the input data can only be briefly described as:  It contains six mandatory fields and seven optional fields. Three of the mandatory fields are numerical fields and the rest are alphabetical. All seven optional fields are alphabetical fields.\\
 
@@ -168,7 +180,7 @@ Figure 6 illustrates the average time taken every test case:\\
 \label{overflow}
 \end{figure}
 
-The graph shows that all three approaches finish all test cases in the same time frame with SOAP taking the longest and JUnit taking the least. This result is reasonable since the amount of time that runtime execution takes is dominant in the values displayed on the graph. At the mean time, the SOAP protocol wraps input data in an envelope when sending and checks the output with assertions and validations. This can explain the fact that it is taking longer than the others. Please note that this subsection does not measure the amount of time for quality analysts to enter the data when using the three approaches. This justified in the next subsection. \\
+The graph shows that all three approaches finish all test cases in the same time frame with SOAP taking the longest and JUnit taking the least. This result is reasonable since the amount of time that runtime execution takes is dominant in the values displayed on the graph. At the mean time, the SOAP protocol wraps input data in an envelope when sending and checks the output with assertions and validations. This can explain the fact that it is taking longer than the others. Please note that this subsection does not measure the amount of time for quality analysts to enter the data when using the three approaches. This justified in the next two subsections. \\
 
 
 \subsection{Automation}
@@ -187,38 +199,47 @@ The possibility for automated SOAP testing solely depends on the software used. 
 
 The window above is SoapUI's interface for automation testing. Although it does save the tester a lot of time and reduce the chance for mistakes, it is still not completely automated in the sense that it still needs to be configured and launched manually every time. True automation requires no human efforts after the initial test case configuration.\\
 
-One of the advantages JUnit has is that it is integrated in the Maven build process. “Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.”\cite{maven} The VIP room web application uses Maven as its build manager. Every time a complete build (tests can be skipped to save build time) is done, the JUnit test cases are automatically run against the application. should any test fail, detail error message will be displayed in the console and the build will be marked as unsuccessful. As previously explained, JUnit “tests the smallest piece of testable software in the application.”\cite{unit} This means that JUnit test cases are likely to be static as shown by the code block on page 6. This seems to defeat the definition of functional testing, which should cover all permutation of scenario. However in software engineering, there are techniques to prove that if all single blocks are performing correctly, the entire application will work in the right way. On the other hand, there are ways connect JUnit test cases to implement a functional test case. A test controller is needed to wrap the cases to form a dynamic test. Here is a modified version of Java Class Simple:
+One of the advantages JUnit has is that it is integrated in the Maven build process. “Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.”\cite{maven} The VIP room web application uses Maven as its build manager. Every time a complete build (tests can be skipped to save build time) is done, the JUnit test cases are automatically run against the application. should any test fail, detail error message will be displayed in the console and the build will be marked as unsuccessful. As previously explained, JUnit “tests the smallest piece of testable software in the application.”\cite{unit} This means that JUnit test cases are likely to be static as shown by the code block on page 6. This seems to defeat the definition of functional testing, which should cover all permutation of scenario. However in software engineering, there are techniques to prove that if all single blocks are performing correctly, the entire application will work in the right way. On the other hand, there are ways connect JUnit test cases to implement a functional test case. A test controller is needed to wrap the cases to form a dynamic test. With the modified version of Simple.java and SimpleTest.java listed in the appendix, functional testing can be achieved.\\
 
-\begin{lstlisting}
-// Simple.java
-
-public class Simple {
-	public int add(int a, int b){
-		return a + b;
-	}
-	
-	public int subtract(int a, int b){
-		return a - b;
-	}
-	
-	public int multiply(int a, int b){
-		return a * b;
-	}
-}
-\end{lstlisting}
 
 \subsection{Reproduction}
-A good testing method should have easily maintained test cases as well as simple reproduction procedure. When two quality analysts communicate with each other on similar testing tasks, some test cases are likely run by both of them. 
-\subsection{Customization}
-\subsection{Management}
+A good testing method should have easily maintained test cases as well as simple reproduction procedure. This subsection is going to assess the easiness for an approach to save and transfer test cases between software and computers.\\
+
+This is a criterion that causes the first approach to disqualify as a viable solution for VIP room testing. Entering data from UI cannot be recorded or saved for easy reproduction. This is why many considers this approach as a casual and informal way to do functional testing. On the other hand, both SOAP and JUnit are quite competitive in this category. SoapUI exports its test projects, which contain test suites and cases, into XML files. These XML files can be read by many other SOAP clients such as SoapSonar to import the projects. Finally, JUnit test cases are merely java files which can be transferred between testers. JUnit does fall behind in terms of compatibility. Since the test cases are so closely written to the java files that build the web application, transferring test cases can cause version control conflict and dilemma.\\
+
+The analysis from section 3.2 and 3.3 have justified that the average time for the tester to enter data cannot be taken into account directly. The lack of automation and reproduction for approach one makes the testers who use that method spending much more time entering data than those who choose the other two approaches.
 
 
+\subsection{Productivity}
+This last subsection analyses how much does each approach help the tester to find defects in the code and communicate the defect to developers. This is the part that JUnit takes the leading position. Due to its deeply integrated nature, JUnit is able to detect run-time errors and unexpected outputs instantly. Moreover, the built-in error messaging and logging feature displays and saves the error neatly for developers or future testers to refer to.\\
+SOAP testing does not quite have the same power as JUnit in this category. Although it is able to detect and log unexpected output through assertions, all run-time error messages are completely out of its control. Instead they depend on how the web application itself handles these errors. Most of the time a registered error message will be displayed on the SOAP client and testers will have to refer to the application's design document to find more detail in order to pin point what went wrong. Finally, the first approach has the least amount of control over these errors since not even assertions can be implemented. The tester will have to have the expected output on paper in order to determine if the output is legitimate.\\
+\newpage
+\section{Evaluation}
+A decision matrix will be used to determine which approach is the most suitable for VIP room. 100 points will be distributed to the four criteria analysed above and the points each criterion gets will be then distributed to the three testing methods. Among the four criteria, the order of impact on efficiency is Automation (40) > Reproduction (20) = Productivity (20) > Time (15). Based on the analysis above, the final distribution is:
+
+\begin{table}[h]\centering
+\caption{Decision Matrix}
+\label{dm}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+      & Time & Automation & Reproduction & Productivity & Total \\ \hline
+UI    & 5    & 0          & 0            & 2            & 7     \\ \hline
+SOAP  & 5    & 20         & 11           & 6            & 42    \\ \hline
+JUnit & 5    & 20         & 9            & 12           & 46    \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
 \section{Conclusions}
-CONCLUSIONS
+The decision matrix indicates that the first approach trails in almost every category while the other two competes for only a couple of points to take the lead. All three methods perform relatively similar in Time since the runtime execution time takes most part of the time measured. SOAP and JUnit splits the forty points in Automation how powerful both methods are in this category. SOAP does have a slight edge over JUnit in maintaining and reproducing because the deeply integrated nature of JUnit is losing itself points in version controlling.  However the latter was able to dominate in productivity with its great emphasis on small unit code quality which help it to secure the final lead against SOAP.\\
 
+Although the decision is usually used to determine the best solution to a problem, it is important to notice that a quantitative value is produced as the final result. These values also shows how close each solution is with the others in terms of suitability. In this case, JUnit only beats SOAP by 4 points. This suggests that SOAP is not too bad of a solution for VIP room's testing. In fact, due to the substantially large difference in the two approaches' mechanics, it is most appropriate to use both methods at the same time. This thus can not only complement the disadvantage of both methods, but also creates redundancy to reduce the room for human error in testing.\\
 
+\newpage
 \section{Recommendations}
-RECOMMENDATIONS
+Based on the analysis of the three different approaches to functional testing for VIP room, this report recommends both SOAP and JUnit testing to be used as a duo testing system. This compensates both the lack of control SOAP has over the individual functions and methods and the lack of thoroughness when using JUnit. Human errors can also be kept at minimum when this redundant testing technique is present.\\
+
+JUnit test cases should be automatically run against the application on its build process, while the SOAP test cases shall be run when the application is deployed onto the server. SOAP test cases should be carefully labelled and grouped in order for quality analysts to share. JUnit test case modifications should be severely managed by version control software. This is because of the fact that a failed JUnit test fails the build process. Unwanted changes on tests can cause many co-workers to fail in building their application locally.\\
 
 
 \newpage
@@ -241,14 +262,71 @@ RECOMMENDATIONS
 
 
 \tocsection{Acknowledgements}
-ACKNOWLEDGEMENTS
+I would like to thank my manager Kevin Ho and Quality Analyst Anshuman Ghandi, both of whom gave inputs on how functionality testing is done in other projects produced by Telus Health. Especially Anshuman who gave me a thorough introduction in SOAP testing and provide me with testing tools such as SoapUI and smaple test cases.\\
+
+I would also like to thank Anna Chen, a friend of mine who inspired me to write on this topic and encouraged me to finish this report on time.\\
 \newpage
 
+\appendix{A}{Sample WSDL file}
 
-% \appendix{APPENDIX INDEX}{APPENDIX NAME}
-% APPENDICES
-% \newpage
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=18cm,height=18cm,keepaspectratio]{img/wsdl.jpg}
+\caption{Simple.wsdl}
+\label{overflow}
+\end{figure}
 
+\newpage
+
+\appendix{B}{Simple.java}
+
+\begin{lstlisting}
+// Simple.java
+public class Simple {
+	public int add(int a, int b){
+		return a + b;
+	}
+	public int subtract(int a, int b){
+		return a - b;
+	}
+	public int multiply(int a, int b){
+		return a * b;
+	}
+}
+\end{lstlisting}
+
+\newpage
+\appendix{C}{SimpleTest.java}
+
+\begin{lstlisting}
+import static org.junit.Assert.*;
+import org.junit.Test;
+import service.Simple;
+
+public class SimpleTest {
+	@Test
+	public void testAdd() {
+		//Class Simple is being tested
+		Simple tester = new Simple();
+		//check if 1 3 returns 4
+		assertEquals("1 + 3 must be 4", 4, tester.add(1,3));
+	}
+	public void testSub() {
+		//Class Simple is being tested
+		Simple tester = new Simple();
+		//check if 8 4 returns 4
+		assertEquals("8 - 4 must be 4", 4, tester.subtract(8,4));
+	}
+	public void testMul() {
+		//Class Simple is being tested
+		Simple tester = new Simple();
+		//check if 2 5 returns 10
+		assertEquals("2 * 5 must be 10", 10, tester.multiply(2,5));
+	}
+}
+\end{lstlisting}
+
+\newpage
 
 \end{document}
 
